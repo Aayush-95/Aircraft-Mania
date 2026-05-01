@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+:root{
+    --bg-primary: #e0e9f3;
+    --bg-secondary: #E2E8F0;
+    --card-bg: #FFFFFF;
+
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+
+    --border-color: #CBD5E1;
+
+    --accent-blue: #0EA5E9;
+    --accent-hover: #0284C7;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+}
