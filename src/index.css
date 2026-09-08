@@ -1,20 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-:root{
-    --bg-primary: #e0e9f3;
-    --bg-secondary: #E2E8F0;
-    --card-bg: #FFFFFF;
+:root {
+  --bg-primary: #0b1329;
+  --bg-secondary: #111d3d;
+  --bg-card: rgba(17, 29, 61, 0.7);
+  --card-border: rgba(56, 189, 248, 0.15);
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --accent-cyan: #38bdf8;
+  --accent-blue: #0284c7;
+  --accent-glow: rgba(56, 189, 248, 0.25);
+  
+  --badge-bg: rgba(56, 189, 248, 0.1);
+  --badge-border: rgba(56, 189, 248, 0.3);
+}
 
-    --text-primary: #0F172A;
-    --text-secondary: #475569;
-
-    --border-color: #CBD5E1;
-
-    --accent-blue: #0EA5E9;
-    --accent-hover: #0284C7;
+* {
+  box-sizing: border-box;
 }
 
 body {
   font-family: 'Outfit', sans-serif;
+  background-color: #0b1329;
+  color: #f8fafc;
+  min-height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(14, 165, 233, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 85% 75%, rgba(99, 102, 241, 0.1) 0%, transparent 45%),
+    linear-gradient(180deg, #070d1e 0%, #0b1329 100%);
+  background-attachment: fixed;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0b1329;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.25);
+  transform: translateY(-4px);
+}
+
+/* Cockpit grid texture */
+.cockpit-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
