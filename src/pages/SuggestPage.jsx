@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Send, CheckCircle2, ArrowRight, FilePlus, RotateCcw } from "lucide-react";
+import ThemeToggle from "../ui/buttons/ThemeToggle";
 
 const SuggestPage = () => {
   const [formData, setFormData] = useState({
@@ -41,47 +43,53 @@ const SuggestPage = () => {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 min-h-screen">
       {/* Header */}
       <div className="text-center mb-10">
-        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/30 text-sky-300 text-xs font-semibold mb-3 font-mono">
-          📡 Community Telemetry
+        <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-md bg-sky-50 dark:bg-[#071224] border border-sky-200 dark:border-[#1a3254] text-sky-700 dark:text-sky-300 text-xs font-mono mb-3 font-semibold shadow-xs">
+          <FilePlus className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
+          <span className="uppercase tracking-wider">Community Contributions</span>
         </span>
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-          Suggest an Aircraft
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight font-display">
+          Suggest an Aircraft Dossier
         </h1>
-        <p className="text-slate-400 text-base mt-2 max-w-xl mx-auto">
-          Help expand the Aircraft Mania database. Submit details for your favorite commercial airliners, military fighters, or rare prototypes.
+        <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm mt-2 max-w-xl mx-auto leading-relaxed">
+          Contribute certified technical specifications for historical airframes, rare prototypes, or newly debuted aircraft.
         </p>
+        <div className="flex justify-center mt-4">
+          <ThemeToggle showLabel className="px-3 py-1.5 text-xs" />
+        </div>
       </div>
 
       {submitted ? (
-        <div className="glass-panel p-10 rounded-3xl border border-sky-500/30 bg-slate-900/80 text-center max-w-xl mx-auto shadow-2xl animate-in fade-in">
-          <span className="text-6xl block mb-4">🚀</span>
-          <h2 className="text-2xl font-bold text-white mb-2">Transmission Received!</h2>
-          <p className="text-slate-300 text-sm mb-6 leading-relaxed">
-            Thank you for contributing <strong>"{formData.aircraftName}"</strong>. Our aviation curator team will review the telemetry data and verify specifications before inducting it into the encyclopedia.
+        <div className="aero-panel p-8 sm:p-10 rounded-xl border border-slate-200 dark:border-[#1a3254] bg-white dark:bg-[#0c182b] text-center max-w-lg mx-auto shadow-sm dark:shadow-2xl transition-colors">
+          <CheckCircle2 className="w-12 h-12 text-emerald-600 dark:text-emerald-400 mx-auto mb-4" />
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2 font-display">Specification Transmitted</h2>
+          <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm mb-6 leading-relaxed">
+            Thank you for contributing telemetry for <strong>"{formData.aircraftName}"</strong>. Our aviation curator team will verify certificate specifications before inducting it into the encyclopedia.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
             <button
               onClick={handleReset}
-              className="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-semibold border border-slate-700"
+              className="px-5 py-2.5 rounded-lg bg-slate-100 dark:bg-[#07101f] hover:bg-slate-200 dark:hover:bg-[#10223b] text-slate-700 dark:text-sky-300 text-xs font-mono border border-slate-300 dark:border-[#1a3254] flex items-center justify-center gap-1.5 transition-colors font-semibold"
             >
-              Submit Another Aircraft
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Submit Another Record</span>
             </button>
             <Link
               to="/aircrafts"
-              className="px-6 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 text-sm font-bold shadow-md shadow-sky-500/20"
+              className="px-5 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors shadow-xs"
             >
-              Browse Catalog
+              <span>Explore Fleet Catalog</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
       ) : (
-        <div className="glass-panel p-6 sm:p-10 rounded-3xl border border-sky-500/20 bg-slate-900/60 shadow-2xl">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="aero-panel p-6 sm:p-8 rounded-xl border border-slate-200 dark:border-[#1a3254] bg-white dark:bg-[#0c182b] shadow-xs dark:shadow-2xl transition-colors">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Aircraft Name */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
-                  Aircraft Name & Variant *
+                <label className="block text-xs font-mono uppercase text-slate-700 dark:text-sky-300 tracking-wider mb-2 font-bold">
+                  Aircraft Designation & Variant *
                 </label>
                 <input
                   type="text"
@@ -89,14 +97,14 @@ const SuggestPage = () => {
                   value={formData.aircraftName}
                   onChange={(e) => setFormData({ ...formData, aircraftName: e.target.value })}
                   placeholder="e.g. McDonnell Douglas MD-11"
-                  className="w-full bg-slate-950 text-slate-100 text-sm px-4 py-3 rounded-xl border border-slate-700 focus:outline-none focus:border-sky-400"
+                  className="w-full bg-slate-50 dark:bg-[#07101f] text-slate-900 dark:text-slate-100 text-xs px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-[#1a3254] focus:outline-none focus:bg-white dark:focus:bg-[#07101f] focus:border-sky-600 dark:focus:border-sky-400 font-mono"
                 />
               </div>
 
               {/* Manufacturer */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
-                  Manufacturer / OEM *
+                <label className="block text-xs font-mono uppercase text-slate-700 dark:text-sky-300 tracking-wider mb-2 font-bold">
+                  Manufacturer / Prime Contractor *
                 </label>
                 <input
                   type="text"
@@ -104,19 +112,19 @@ const SuggestPage = () => {
                   value={formData.manufacturer}
                   onChange={(e) => setFormData({ ...formData, manufacturer: e.target.value })}
                   placeholder="e.g. McDonnell Douglas / Boeing"
-                  className="w-full bg-slate-950 text-slate-100 text-sm px-4 py-3 rounded-xl border border-slate-700 focus:outline-none focus:border-sky-400"
+                  className="w-full bg-slate-50 dark:bg-[#07101f] text-slate-900 dark:text-slate-100 text-xs px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-[#1a3254] focus:outline-none focus:bg-white dark:focus:bg-[#07101f] focus:border-sky-600 dark:focus:border-sky-400 font-mono"
                 />
               </div>
 
               {/* Category */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
-                  Aviation Category
+                <label className="block text-xs font-mono uppercase text-slate-700 dark:text-sky-300 tracking-wider mb-2 font-bold">
+                  Classification
                 </label>
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full bg-slate-950 text-slate-100 text-sm px-4 py-3 rounded-xl border border-slate-700 focus:outline-none focus:border-sky-400"
+                  className="w-full bg-slate-50 dark:bg-[#07101f] text-slate-900 dark:text-slate-100 text-xs px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-[#1a3254] focus:outline-none focus:bg-white dark:focus:bg-[#07101f] focus:border-sky-600 dark:focus:border-sky-400 font-display"
                 >
                   <option value="Commercial">Commercial Airliner</option>
                   <option value="Military">Military Fighter / Stealth</option>
@@ -129,21 +137,21 @@ const SuggestPage = () => {
 
               {/* Top Speed */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
-                  Top Speed (km/h or Mach)
+                <label className="block text-xs font-mono uppercase text-slate-700 dark:text-sky-300 tracking-wider mb-2 font-bold">
+                  Top Airspeed (km/h or Mach)
                 </label>
                 <input
                   type="text"
                   value={formData.topSpeed}
                   onChange={(e) => setFormData({ ...formData, topSpeed: e.target.value })}
                   placeholder="e.g. 945 km/h (Mach 0.88)"
-                  className="w-full bg-slate-950 text-slate-100 text-sm px-4 py-3 rounded-xl border border-slate-700 focus:outline-none focus:border-sky-400"
+                  className="w-full bg-slate-50 dark:bg-[#07101f] text-slate-900 dark:text-slate-100 text-xs px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-[#1a3254] focus:outline-none focus:bg-white dark:focus:bg-[#07101f] focus:border-sky-600 dark:focus:border-sky-400 font-mono"
                 />
               </div>
 
               {/* Max Range */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-mono uppercase text-slate-700 dark:text-sky-300 tracking-wider mb-2 font-bold">
                   Maximum Range (km)
                 </label>
                 <input
@@ -151,46 +159,47 @@ const SuggestPage = () => {
                   value={formData.maxRange}
                   onChange={(e) => setFormData({ ...formData, maxRange: e.target.value })}
                   placeholder="e.g. 12,600 km"
-                  className="w-full bg-slate-950 text-slate-100 text-sm px-4 py-3 rounded-xl border border-slate-700 focus:outline-none focus:border-sky-400"
+                  className="w-full bg-slate-50 dark:bg-[#07101f] text-slate-900 dark:text-slate-100 text-xs px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-[#1a3254] focus:outline-none focus:bg-white dark:focus:bg-[#07101f] focus:border-sky-600 dark:focus:border-sky-400 font-mono"
                 />
               </div>
 
               {/* Contributor Name */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
-                  Your Call-Sign / Name
+                <label className="block text-xs font-mono uppercase text-slate-700 dark:text-sky-300 tracking-wider mb-2 font-bold">
+                  Contributor Call-Sign / Name
                 </label>
                 <input
                   type="text"
                   value={formData.contributorName}
                   onChange={(e) => setFormData({ ...formData, contributorName: e.target.value })}
-                  placeholder="e.g. Captain Maverick"
-                  className="w-full bg-slate-950 text-slate-100 text-sm px-4 py-3 rounded-xl border border-slate-700 focus:outline-none focus:border-sky-400"
+                  placeholder="e.g. Flight Captain Maverick"
+                  className="w-full bg-slate-50 dark:bg-[#07101f] text-slate-900 dark:text-slate-100 text-xs px-3.5 py-2.5 rounded-lg border border-slate-300 dark:border-[#1a3254] focus:outline-none focus:bg-white dark:focus:bg-[#07101f] focus:border-sky-600 dark:focus:border-sky-400 font-mono"
                 />
               </div>
             </div>
 
             {/* Description */}
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
-                Aircraft Overview & Key Highlights
+              <label className="block text-xs font-mono uppercase text-slate-700 dark:text-sky-300 tracking-wider mb-2 font-bold">
+                Technical Background & Operational Highlights
               </label>
               <textarea
                 rows={4}
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                placeholder="Share unique specifications, history, notable airlines, or why this aircraft deserves a spotlight..."
-                className="w-full bg-slate-950 text-slate-100 text-sm p-4 rounded-xl border border-slate-700 focus:outline-none focus:border-sky-400"
+                placeholder="Detail technical innovations, powerplant specifications, certification milestones, or notable airframe history..."
+                className="w-full bg-slate-50 dark:bg-[#07101f] text-slate-900 dark:text-slate-100 text-xs p-3.5 rounded-lg border border-slate-300 dark:border-[#1a3254] focus:outline-none focus:bg-white dark:focus:bg-[#07101f] focus:border-sky-600 dark:focus:border-sky-400 font-mono"
               />
             </div>
 
             {/* Submit Button */}
-            <div className="pt-4 flex justify-end">
+            <div className="pt-2 flex justify-end">
               <button
                 type="submit"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-300 hover:to-cyan-300 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/20 transition-all transform hover:-translate-y-0.5"
+                className="px-6 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs transition-colors flex items-center gap-2 shadow-sm"
               >
-                Submit Aircraft Telemetry ✈️
+                <span>Transmit Telemetry Record</span>
+                <Send className="w-3.5 h-3.5" />
               </button>
             </div>
           </form>

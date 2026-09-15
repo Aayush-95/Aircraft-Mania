@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Search, X, ArrowRight } from "lucide-react";
 import { aircraftData } from "../../data/aircraftData";
 
 const SearchBarNav = () => {
@@ -43,9 +44,7 @@ const SearchBarNav = () => {
   return (
     <div className="relative w-full max-w-xs" ref={dropdownRef}>
       <form onSubmit={handleSearchSubmit} className="relative flex items-center">
-        <span className="absolute left-3.5 text-slate-400 pointer-events-none text-sm">
-          🔍
-        </span>
+        <Search className="w-4 h-4 absolute left-3 text-sky-600 pointer-events-none" />
         <input
           type="text"
           value={query}
@@ -54,8 +53,8 @@ const SearchBarNav = () => {
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
-          placeholder="Search aircraft, company..."
-          className="w-full bg-slate-900/80 text-slate-100 text-sm pl-9 pr-4 py-2 rounded-full border border-sky-500/30 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 placeholder:text-slate-500 transition shadow-inner"
+          placeholder="Search call-sign, model, specs..."
+          className="w-full bg-slate-100/90 text-slate-900 text-xs pl-9 pr-7 py-2 rounded-lg border border-slate-300 focus:outline-none focus:bg-white focus:border-sky-600 focus:ring-1 focus:ring-sky-500/30 placeholder:text-slate-400 transition font-mono"
         />
         {query && (
           <button
@@ -64,63 +63,65 @@ const SearchBarNav = () => {
               setQuery("");
               setIsOpen(false);
             }}
-            className="absolute right-3 text-slate-400 hover:text-slate-200 text-xs"
+            className="absolute right-2.5 text-slate-400 hover:text-slate-700"
           >
-            ✕
+            <X className="w-3.5 h-3.5" />
           </button>
         )}
       </form>
 
       {/* Dropdown Suggestions */}
       {isOpen && query.trim() !== "" && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-slate-900/95 backdrop-blur-xl border border-sky-500/30 rounded-xl shadow-2xl overflow-hidden z-50 animate-in fade-in duration-150">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-slate-200 rounded-lg shadow-xl overflow-hidden z-50">
           {filteredAircraft.length > 0 ? (
             <div className="py-1">
-              <div className="px-3 py-1 text-[10px] uppercase font-semibold text-slate-400 tracking-wider">
-                Matching Aircraft
+              <div className="px-3 py-1.5 text-[10px] uppercase font-mono font-semibold text-slate-500 tracking-wider border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                <span>Matching Specifications</span>
+                <span className="text-[9px] text-sky-600 font-bold">FLIGHT ARCHIVE</span>
               </div>
               {filteredAircraft.map((plane) => (
                 <button
                   key={plane.id}
                   onClick={() => handleSelectAircraft(plane.id)}
-                  className="w-full text-left px-3 py-2 hover:bg-sky-500/15 flex items-center gap-3 transition-colors text-sm text-slate-200 group"
+                  className="w-full text-left px-3 py-2 hover:bg-sky-50/80 flex items-center gap-3 transition-colors text-sm text-slate-700 group border-b border-slate-50 last:border-0"
                 >
                   <img
                     src={plane.image}
                     alt=""
-                    className="w-9 h-7 object-cover rounded border border-slate-700"
+                    className="w-9 h-7 object-cover rounded border border-slate-200"
                   />
                   <div className="flex-1 truncate">
-                    <span className="font-medium text-slate-100 group-hover:text-sky-300 block truncate">
+                    <span className="font-semibold text-slate-900 group-hover:text-sky-700 block truncate text-xs font-display">
                       {plane.name}
                     </span>
-                    <span className="text-[11px] text-slate-400">
-                      {plane.manufacturer} • {plane.category}
+                    <span className="text-[10px] font-mono text-slate-500">
+                      {plane.manufacturer} • Mach {plane.speedMach}
                     </span>
                   </div>
                 </button>
               ))}
-              <div className="p-1 border-t border-slate-800">
+              <div className="p-1.5 border-t border-slate-100 bg-slate-50">
                 <button
                   onClick={handleSearchSubmit}
-                  className="w-full py-1.5 text-center text-xs text-sky-400 hover:text-sky-300 hover:bg-slate-800/60 rounded"
+                  className="w-full py-1.5 text-center text-xs text-sky-700 hover:text-sky-800 hover:bg-sky-100/50 rounded flex items-center justify-center gap-1 font-mono font-medium"
                 >
-                  View all results for "{query}" →
+                  <span>View telemetry for "{query}"</span>
+                  <ArrowRight className="w-3 h-3" />
                 </button>
               </div>
             </div>
           ) : (
-            <div className="p-4 text-center text-xs text-slate-400">
-              No aircraft found for "{query}".
-              <div className="mt-1">
+            <div className="p-4 text-center text-xs text-slate-500">
+              No matching aircraft found for "{query}".
+              <div className="mt-2">
                 <button
                   onClick={() => {
                     navigate("/aircrafts");
                     setIsOpen(false);
                   }}
-                  className="text-sky-400 hover:underline"
+                  className="text-sky-600 hover:underline font-mono text-[11px] font-semibold"
                 >
-                  Browse all aircraft
+                  Browse Full Catalog
                 </button>
               </div>
             </div>
