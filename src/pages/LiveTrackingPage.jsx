@@ -26,7 +26,7 @@ import FlightRadarSidebar from "../components/radar/FlightRadarSidebar";
 const REFRESH_INTERVAL_SECONDS = 15; // 15 seconds respects OpenSky's 10s rule
 
 const LiveTrackingPage = () => {
-  const [selectedRegionKey, setSelectedRegionKey] = useState("EUROPE");
+  const [selectedRegionKey, setSelectedRegionKey] = useState("AHMEDABAD_GUJARAT");
   const [customBounds, setCustomBounds] = useState(null);
   const [flights, setFlights] = useState([]);
   const [selectedFlight, setSelectedFlight] = useState(null);
@@ -39,7 +39,7 @@ const LiveTrackingPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const countdownTimerRef = useRef(null);
-  const activeRegion = RADAR_REGIONS[selectedRegionKey] || RADAR_REGIONS.EUROPE;
+  const activeRegion = RADAR_REGIONS[selectedRegionKey] || RADAR_REGIONS.AHMEDABAD_GUJARAT;
 
   // Load flight data from OpenSky
   const loadFlights = useCallback(async (regionKey = selectedRegionKey, bounds = customBounds) => {
@@ -189,6 +189,16 @@ const LiveTrackingPage = () => {
             <Globe className="w-3.5 h-3.5 text-sky-500" />
             Sectors:
           </span>
+          {customBounds && (
+            <button
+              onClick={() => setCustomBounds(null)}
+              className="px-3 py-1 rounded-md text-xs font-mono whitespace-nowrap bg-emerald-600 text-white font-bold flex items-center gap-1.5 shadow-sm hover:bg-emerald-500 transition-colors"
+              title="Click to reset to regional sector preset"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+              <span>📍 Custom Zoomed Airspace (Reset)</span>
+            </button>
+          )}
           {Object.entries(RADAR_REGIONS).map(([key, region]) => (
             <button
               key={key}

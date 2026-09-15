@@ -252,3 +252,26 @@ h1, h2, h3, h4, .font-display {
 .animate-target-ping {
   animation: target-ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
+
+/* Canvas Marker Tooltip Overrides */
+.radar-plane-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.radar-plane-tooltip::before {
+  display: none !important;
+}
+
+/* Ensure custom radar plane icon has no Leaflet default styling */
+.custom-radar-plane {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Canvas renderer cursor for interactive layers */
+.leaflet-interactive {
+  cursor: pointer !important;
+}

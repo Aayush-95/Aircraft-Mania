@@ -7,6 +7,22 @@
 
 // Regional Bounding Boxes [lamin, lomin, lamax, lomax]
 export const RADAR_REGIONS = {
+  AHMEDABAD_GUJARAT: {
+    id: "AHMEDABAD_GUJARAT",
+    name: "Ahmedabad & Gujarat (AMD)",
+    description: "Sardar Vallabhbhai Patel International & Western India corridor",
+    bounds: { lamin: 21.0, lomin: 70.0, lamax: 25.0, lomax: 75.0 },
+    center: [23.02, 72.57],
+    zoom: 7,
+  },
+  INDIA_SUB: {
+    id: "INDIA_SUB",
+    name: "South Asia / India",
+    description: "Indian subcontinent airspace and Indian Ocean crossings",
+    bounds: { lamin: 6.0, lomin: 68.0, lamax: 35.0, lomax: 95.0 },
+    center: [21.5, 78.5],
+    zoom: 5,
+  },
   GLOBAL: {
     id: "GLOBAL",
     name: "Global Corridors",
@@ -14,14 +30,6 @@ export const RADAR_REGIONS = {
     bounds: null, // Full world or auto-segmented
     center: [28.0, 10.0],
     zoom: 3,
-  },
-  NORTH_AMERICA: {
-    id: "NORTH_AMERICA",
-    name: "North America (FAA)",
-    description: "Transcontinental US and Canadian airspace",
-    bounds: { lamin: 24.0, lomin: -125.0, lamax: 50.0, lomax: -65.0 },
-    center: [38.5, -96.0],
-    zoom: 4,
   },
   EUROPE: {
     id: "EUROPE",
@@ -31,14 +39,6 @@ export const RADAR_REGIONS = {
     center: [48.0, 10.0],
     zoom: 5,
   },
-  ASIA_PACIFIC: {
-    id: "ASIA_PACIFIC",
-    name: "Asia-Pacific",
-    description: "East Asia, Japan, South China Sea & Australia gateways",
-    bounds: { lamin: 10.0, lomin: 95.0, lamax: 45.0, lomax: 145.0 },
-    center: [28.0, 120.0],
-    zoom: 4,
-  },
   MIDDLE_EAST: {
     id: "MIDDLE_EAST",
     name: "Middle East Hubs",
@@ -47,13 +47,21 @@ export const RADAR_REGIONS = {
     center: [25.0, 52.0],
     zoom: 5,
   },
-  INDIA_SUB: {
-    id: "INDIA_SUB",
-    name: "South Asia / India",
-    description: "Indian subcontinent airspace and Indian Ocean crossings",
-    bounds: { lamin: 6.0, lomin: 68.0, lamax: 35.0, lomax: 95.0 },
-    center: [21.5, 78.5],
-    zoom: 5,
+  NORTH_AMERICA: {
+    id: "NORTH_AMERICA",
+    name: "North America (FAA)",
+    description: "Transcontinental US and Canadian airspace",
+    bounds: { lamin: 24.0, lomin: -125.0, lamax: 50.0, lomax: -65.0 },
+    center: [38.5, -96.0],
+    zoom: 4,
+  },
+  ASIA_PACIFIC: {
+    id: "ASIA_PACIFIC",
+    name: "Asia-Pacific",
+    description: "East Asia, Japan, South China Sea & Australia gateways",
+    bounds: { lamin: 10.0, lomin: 95.0, lamax: 45.0, lomax: 145.0 },
+    center: [28.0, 120.0],
+    zoom: 4,
   },
   TRANSATLANTIC: {
     id: "TRANSATLANTIC",
